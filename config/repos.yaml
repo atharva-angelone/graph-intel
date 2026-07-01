@@ -1,0 +1,34 @@
+# How to test on a repo:
+# 1. Clone the repo somewhere on your machine: git clone <repo-link>
+# 2. Put that folder's path in `url` below as a file:// path
+# 3. Set `name` (any unique label) and the repo's branch (check using git branch --show-current)
+#
+# file:// path format:
+#   macOS / Linux: file:///Users/path-to-repo
+#   Windows:       file:///C:/path-to-repo
+repositories:
+  - name: my-repo
+    url: file:///Users/path-to-repo
+    branch: main
+
+git:
+  timeout: 10m
+
+graphify:
+  command: graphify
+  args:
+    - update
+    - "{repo_path}"
+  output_file: graphify-out/graph.json
+  timeout: 20m
+
+extractors:
+  deps: true
+  http_api: true
+  kafka: true
+  mssql: true
+  glue: true
+  max_parallel: 0 # 0 = all in parallel
+
+org:
+  prefixes: []

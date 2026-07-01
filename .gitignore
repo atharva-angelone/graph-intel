@@ -1,0 +1,39 @@
+# Runtime state
+workdir/
+workdir-test/
+graphify-out/
+
+# Local configuration
+config/repos.local.yaml
+.env
+
+# Built binaries
+/indexer
+/importer
+/query-service
+/mcp-server
+*.exe
+*.exe~
+
+# Temporary / backup files
+*~
+*.swp
+*.log
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+
+# Claude local settings
+.claude/
+
+# Sample data / local testing
+sample-data/
+
+# md files
+architecture.md
+.graphifyignore
+graphify-how-it-works.md
+graphify-readme.md
+CLAUDE.md
