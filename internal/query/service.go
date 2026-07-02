@@ -170,7 +170,10 @@ func (s *Service) FindCallees(ctx context.Context, symbol string) ([]CallEdge, e
 	const cypher = `
 WITH toLower($s) AS slow
 MATCH (caller:Entity)-[:CALLS]->(callee:Entity)
-WHERE toLower(caller.name) = slow OR toLower(caller.norm_name) = slow
+WHERE toLower(caller.name) = slow
+   OR toLower(caller.norm_name) = slow
+WITH caller, callee
+ORDER BY callee.repo, callee.path, callee.line
 RETURN caller.name AS caller,
        caller.repo AS caller_repo,
        caller.path AS caller_path,
@@ -179,7 +182,6 @@ RETURN caller.name AS caller,
        callee.name AS callee,
        callee.repo AS callee_repo,
        callee.path AS callee_path
-ORDER BY callee.repo, callee.path, callee.line
 `
 	return s.runCallEdgeQuery(ctx, cypher, symbol)
 }
